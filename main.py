@@ -70,6 +70,7 @@ def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-10)
 
 predictions = []
+
 for file, vec in zip(test_files, test_features):
     sims = [cosine_similarity(vec, t) for t in train_features]
     best = int(np.argmax(sims))
@@ -77,13 +78,7 @@ for file, vec in zip(test_files, test_features):
     print(f"{file} -> {train_labels[best]} ({sims[best]:.4f})")
 
 
-LABEL_MAP = { "Num0": 0, "Num1": 1, "Num2": 2, "Num3": 3, "Num4": 4, "Num5": 5, "Num6": 6, "Num7": 7, "Num8": 8, "Num9": 9,"FanDown": 10, "FanOff": 11,
-    "FanOn": 12,
-    "FanUp": 13,
-    "LightOff": 14,
-    "LightOn": 15,
-    "SetThermo": 16,
-}
+LABEL_MAP = { "Num0": 0, "Num1": 1, "Num2": 2, "Num3": 3, "Num4": 4, "Num5": 5, "Num6": 6, "Num7": 7, "Num8": 8, "Num9": 9,"FanDown": 10, "FanOff": 11, "FanOn": 12, "FanUp": 13, "LightOff": 14, "LightOn": 15, "SetThermo": 16,}
 
 unknown = sorted(set(train_labels) - set(LABEL_MAP))
 if unknown:
